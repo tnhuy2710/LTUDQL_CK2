@@ -41,7 +41,45 @@
 		
 	if(!empty($_POST["DON_VI"]))
 	{
-		echo "false";
+		while($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC) ) {
+			if($row['MA_DON_VI'] == $_POST["DON_VI"])
+			{
+				$result .= '<tr>';                                                            
+				$result .= '<td scope="row">' .$row['MA_ND'] . '</td>';
+				$result .= '<td>' .$row['TEN_ND'] .  '</td>';
+				$result .= '<td>' .$row['TEN_DON_VI'] .  '</td>';
+				$result .= '<td>';
+				$temp = "";
+				foreach ($pHAN_NHOM as $item){
+				if($item['MA_NGUOI_DUNG'] === $row['MA_ND'])
+				{                                    				  
+					$result .= $item['TEN_NHOM'] . '<br>';
+					$temp .= $item['MA_NHOM_NGUOI_DUNG'] . '_';
+				} 
+				}
+																														
+				$result .= '</td>';
+				$result .= '<td>' .$row['EMAIL'] . '</td>';
+				$result .= '<td> <i id="'
+							.$row['MA_ND'] . ','
+							.$row['TEN_ND'] . ','
+							.$row['MA_DON_VI'] . ','
+							.$row['TEN_DON_VI'] . ','
+							.$row['EMAIL'] . ','
+							.$temp
+							. '" class="fa fa-pencil-square-o" style="color: #17a2b8;font-size: 18px;cursor:pointer;"
+							onclick="Edit(this.id)"></i>
+						</td>';
+				$result .= '<td>
+						<i type="button" data-toggle="modal" data-target="#exampleModal">
+							<i id="' .$row['MA_ND']
+							. '" class="fa fa-trash-o" style="color: red;font-size: 18px;cursor: pointer;" 
+							onclick="Delete(this.id)"></i>
+						</i>
+					</td>';
+				$result .= '</tr>';
+			}
+		}			
 	}
 	else
 	{                          
@@ -61,26 +99,26 @@
 			}
 																													 
 			$result .= '</td>';
-			$result .= '<td>' .$row['EMAIL'] .  '</td>';                                                                                          
-			$result .= '<td> <i id="' 
+			$result .= '<td>' .$row['EMAIL'] . '</td>';
+			$result .= '<td> <i id="'
 						.$row['MA_ND'] . ','
 						.$row['TEN_ND'] . ','
 						.$row['MA_DON_VI'] . ','
 						.$row['TEN_DON_VI'] . ','
 						.$row['EMAIL'] . ','
 						.$temp
-						. '" class="fa fa-pencil-square-o" style="color: #17a2b8;font-size: 18px;cursor:pointer;" 
+						. '" class="fa fa-pencil-square-o" style="color: #17a2b8;font-size: 18px;cursor:pointer;"
 						onclick="Edit(this.id)"></i>
-					</td>';                                                                                     
-			$result .= '<td>                                                                         
+					</td>';
+			$result .= '<td>
 					<i type="button" data-toggle="modal" data-target="#exampleModal">
 						<i id="' .$row['MA_ND']
 						. '" class="fa fa-trash-o" style="color: red;font-size: 18px;cursor: pointer;" 
 						  onclick="Delete(this.id)"></i>
-					</i>                                     
+					</i>
 				  </td>';
-			$result .= '</tr>';                                                   
-		  }                       
+			$result .= '</tr>';
+		  }
 	}
 	$result .= '</table>';
 	echo $result;
