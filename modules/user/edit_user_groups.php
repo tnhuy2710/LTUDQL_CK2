@@ -20,7 +20,7 @@
 					echo "Không thể thêm, xin vui lòng liên hệ hỗ trợ";
 					exit();
 				}
-			}				
+			}
 		}
 
 		if(!empty($_POST["delete_GROUPS"]))
@@ -34,13 +34,12 @@
 					die( print_r( sqlsrv_errors(), true) );
 					echo "Không thể xóa, xin vui lòng liên hệ hỗ trợ";
 					exit();
-				} 
-			}				
+				}
+			}
 		}
 		echo "Cập nhật thành công!";
-	}			
-	sqlsrv_free_stmt($stmt);
-	sqlsrv_free_stmt($iNSERT_ND);
+	}
+	sqlsrv_free_stmt($iNSERT_NND);
 	sqlsrv_free_stmt($iNSERT_NND);
 	sqlsrv_close($conn);
 ?>
