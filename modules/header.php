@@ -69,9 +69,10 @@
             <li class="item"><a href="./" target="_self" title="Bạn cần gì">TRANG CHỦ</a></li>
             <li class="item"><a href="index.php?view=category" target="_self" >DANH MỤC</a></li>
             <li class="item"><a href="index.php?view=report" target="_self">BÁO CÁO</a></li>
-            <li class="item"><a href="index.php?view=user" target="_self" >NGƯỜI DÙNG</a></li>
+            <li class="item"><a href="index.php?pageno=1" target="_self" >NGƯỜI DÙNG</a></li>
             <li class="item"><a href="index.php?view=user_groups" target="_self" >NHÓM NGƯỜI DÙNG</a></li>
             <li class="item"><a href="index.php?view=permissions_group" target="_self" >PHÂN QUYỀN</a></li>
+            <!-- <li class="item"><a href="index.php?pageno=1" target="_self" >test</a></li> -->
           </ul>
         </div>
       </div>

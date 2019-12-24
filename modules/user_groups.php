@@ -1,8 +1,4 @@
 <?php
-  $serverName = "10.100.26.34";
-  $connectionInfo = array("Database" => "Alibaba", "CharacterSet" => "UTF-8", "UID" => "QuanLyTSCNTT", "PWD" => "QuanLyTSCNTT");
-  $conn = sqlsrv_connect($serverName, $connectionInfo);
-
   $sql = "SELECT *
           FROM NHOM_NGUOI_DUNG";
 
@@ -114,6 +110,7 @@
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    margin: 20px;
   }
 
   main #nguoi-dung .div-nd .them-nd {

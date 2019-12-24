@@ -1,8 +1,8 @@
 <?php
   //include 'connect.php';
   $serverName = "10.100.26.34";
-  $connectionInfo = array("Database" => "Alibaba", "CharacterSet" => "UTF-8", "UID" => "QuanLyTSCNTT", "PWD" => "QuanLyTSCNTT");
-  $conn = sqlsrv_connect($serverName, $connectionInfo);
+	$connectionInfo = array("Database" => "DB_PQChiPhi", "CharacterSet" => "UTF-8", "UID" => "user", "PWD" => "Klb123456");
+	$conn = sqlsrv_connect($serverName, $connectionInfo);
 
   $q_DON_VI = "SELECT *
               FROM DON_VI";
@@ -117,6 +117,7 @@
             <div class="form-group">
               <input type="hidden" class="form-control" id="d_MA_ND" aria-describedby="emailHelp" placeholder="" readonly="readonly" />
             </div>
+            <input type="hidden" id="pageno" value="<?php echo $_GET["pageno"] ?>"/>
           </form>
           <button class="btn btn-primary" id="SAVE" name="SAVE" value="save">THÊM</button>
           <div id="e_NGUOI_DUNG">
@@ -206,10 +207,12 @@
     $("#loading").hide();
 
     //Show người dùng
-    $.ajax({
+    var pageno = $("#pageno").val();
+    var DON_VI = "";
+    $.ajax({      
       type: "POST",
       url: "http://localhost/phan_quyen_chi_phi/modules/user/get_user_by_DV.php",
-      data: "",
+      data: {pageno, DON_VI},
       success: function(result) {
         $("#show").html(result);
       }
@@ -246,12 +249,11 @@
     //Lấy người dùng theo đơn vị
     $("#s_DON_VI").change(function() {
       var DON_VI = $(this).val();
-      var s_DON_VI = "DON_VI=" + DON_VI;
 
       $.ajax({
         type: "POST",
         url: "http://localhost/phan_quyen_chi_phi/modules/user/get_user_by_DV.php",
-        data: s_DON_VI,
+        data: {pageno, DON_VI},
         success: function(result) {
           $("#show").html(result);
         }
@@ -453,6 +455,7 @@
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    margin: 20px
   }
 
   main #nguoi-dung .div-nd .them-nd {

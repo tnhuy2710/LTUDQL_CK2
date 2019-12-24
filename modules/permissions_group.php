@@ -1,8 +1,4 @@
 <?php
-    $serverName = "10.100.26.34";
-    $connectionInfo = array("Database" => "Alibaba", "CharacterSet" => "UTF-8", "UID" => "QuanLyTSCNTT", "PWD" => "QuanLyTSCNTT");
-    $conn = sqlsrv_connect($serverName, $connectionInfo);
-
     $q_NHOM_ND = "SELECT *
                 FROM NHOM_NGUOI_DUNG";
 
@@ -24,7 +20,7 @@
     <main>
         <section class="container" id="phan-quyen">
             <h1 class="title">PHÂN QUYỀN</h1>
-            <form method="post" action="">
+            <div style="margin: 20px">
                 <div class="chon-nhom">
                     <label for="">Chọn nhóm người dùng:</label>
                     <select class="form-control" name="MA_NHOM" id="MA_NHOM" onchange="Change(this.id)">
@@ -107,10 +103,10 @@
                             </a>
                         </li>
                     </ul>
-                </div>
-            </form>
+                </div>            
             <button type="submit" class="btn btn-primary" id="SAVE" name="SAVE" value="save"">LƯU</button>
-        <button type=" submit" class="btn btn-default" id="CANCEL" name="CANCEL" value="cancel">LÀM MỚI</button>
+            <button type=" submit" class="btn btn-default" id="CANCEL" name="CANCEL" value="cancel">LÀM MỚI</button>
+        </div>
         </section>
     </main>
 </div>
@@ -260,7 +256,7 @@
 
     main #phan-quyen .phan-quyen .bang-pq {
         width: 100%;
-        margin-bottom: 50px;
+        margin-bottom: 30px;
     }
 
     main #phan-quyen .phan-quyen .bang-pq .rowc1 {
@@ -342,7 +338,7 @@
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
-        width: 100%;
+        width: 40%;
         background-color: #daf1f3;
     }
 
@@ -350,7 +346,7 @@
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
-        width: 25%;
+        width: 35%;
         min-height: 40px;
         border-bottom: 0.5px solid #555555;
         padding-left: 5px;
@@ -364,14 +360,14 @@
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
-        width: 75%;
+        width: 100%;
     }
 
     main #phan-quyen .phan-quyen .bang-pq .rowc1 .menuc1 ul li {
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
-        width: 20%;
+        width: 100%;
         min-height: 40px;
         border-bottom: 0.5px solid #555555;
         padding-left: 5px;
