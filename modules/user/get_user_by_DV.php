@@ -13,13 +13,13 @@
 	$offset = ($pageno - 1) * $limit;
 
 	$total_pages_sql = "SELECT COUNT(*) AS total FROM NGUOI_DUNG";
-	$THIET_BI = sqlsrv_query($conn, $total_pages_sql);
-	$total_rows = sqlsrv_fetch_array($THIET_BI, SQLSRV_FETCH_ASSOC);
+	$NGUOI_DUNG = sqlsrv_query($conn, $total_pages_sql);
+	$total_rows = sqlsrv_fetch_array($NGUOI_DUNG, SQLSRV_FETCH_ASSOC);
 	$total_pages = ceil($total_rows['total'] / $limit);
 
 	$q_PHAN_NHOM = "SELECT pn.*, nnd.TEN_NHOM
-						FROM PHAN_NHOM pn
-						INNER JOIN NHOM_NGUOI_DUNG nnd ON nnd.MA_NHOM = pn.MA_NHOM_NGUOI_DUNG";
+					FROM PHAN_NHOM pn
+					INNER JOIN NHOM_NGUOI_DUNG nnd ON nnd.MA_NHOM = pn.MA_NHOM_NGUOI_DUNG";
 
 	$PHAN_NHOM = sqlsrv_query($conn, $q_PHAN_NHOM);
 	if ($PHAN_NHOM === false) {
@@ -35,7 +35,7 @@
 	$result .= '
 		<table class="table table-hover table-dark">
 		<thead>
-			<tr style="background-color: #d9d9d9">
+			<tr style="background-color: #1297a1">
 				<th scope="col">Mã người dùng</th>
 				<th scope="col">Tên người dùng</th>
 				<th scope="col">Đơn vị</th>
@@ -105,16 +105,17 @@
 		}
 	} else {
 		$sql = "WITH pagination AS (
-			SELECT 
-				ROW_NUMBER() OVER(
-					ORDER BY
-					MA_ND
-				) row_num, *
-			FROM
-				NGUOI_DUNG nd
-		) SELECT *
+				SELECT 
+					ROW_NUMBER() OVER(
+						ORDER BY
+						MA_ND
+					) row_num, *
+				FROM
+					NGUOI_DUNG nd
+		) SELECT *, dv.TEN_DON_VI
 		FROM 
 			pagination
+			INNER JOIN DON_VI dv ON pagination.MA_DON_VI = dv.MA_DON_VI
 		WHERE 
 			row_num > $offset  AND
 			row_num <= $no_of_records_per_page";
@@ -179,7 +180,7 @@
 
 	for($i=1; $i <= $total_pages; $i++)
 	{
-		$result .= '<li class="page-item"><a class="page-link" href="?pageno=' . $i . '">' . $i .'</a></li>';		
+		$result .= '<li class="page-item"><a class="page-link">' . $i .'</a></li>';		
 	}
 
 	$result .= '<li class="page-item ';
